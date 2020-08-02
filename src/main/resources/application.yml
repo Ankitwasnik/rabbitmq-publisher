@@ -1,0 +1,17 @@
+spring:
+  rabbitmq:
+    addresses: amqp://guest:guest@localhost:5672/
+  cloud:
+    stream:
+      bindings:
+        processTxnRequest-out-0:
+          destination: txn
+          contentType: application/json
+      rabbit:
+        bindings:
+          processTxnRequest-out-0:
+            producer:
+              batchingEnabled: true
+              batchSize: 500
+              batchBufferLimit: 100000
+              batchTimeout: 5000 #batchSize has higher preference than batchTimeout. If messages are received within every 5sec, it will accumulate in a single batch till the batch is full or till there is a gap of 5sec between any two messages.
