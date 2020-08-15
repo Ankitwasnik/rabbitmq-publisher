@@ -1,11 +1,11 @@
 spring:
   rabbitmq:
-    addresses: amqp://guest:guest@localhost:5672/
+    addresses: amqp://guest:guest@localhost:5672/   # amqp://username:password@host:port
   cloud:
     stream:
       bindings:
-        processTxnRequest-out-0:
-          destination: txn
+        processTxnRequest-out-0:                    # binding name
+          destination: txn                          # topic name
           contentType: application/json
       rabbit:
         bindings:
